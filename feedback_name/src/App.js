@@ -1,4 +1,3 @@
-
 import "./App.css";
 
 function App() {
@@ -9,18 +8,29 @@ function App() {
     { id: 2, text: "Comment Two" },
     { id: 3, text: "Comment Three" },
   ];
+
+  const loading = false;
+  const showComments = true;
+
+  if (loading) return <h1>Loading...</h1>;
+
+  let commentBlock = (<div className='comments'>
+                        <h3>Comments ({comments.length})</h3>
+                        <ul>
+                          {comments.map((comment, index) => (
+                            <li key={index}>{comment.text}</li>
+                          ))}
+                        </ul>
+                      </div>)
+
   return (
     <div className='container'>
       <h3>{title.toUpperCase()}</h3>
       <p>{body}</p>
-      <div className='comments'>
-        <h3>Comments ({comments.length})</h3>
-        <ul>
-          {comments.map((comment, index) => (
-            <li key={index}>{comment.text}</li>
-          ))}
-        </ul>
-      </div>
+
+      {showComments && commentBlock}
+
+      
     </div>
   );
 }
